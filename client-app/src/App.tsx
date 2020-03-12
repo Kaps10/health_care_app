@@ -1,24 +1,42 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useEffect } from "react";
+import ButtonAppBar from "./Appbar";
 import "./App.css";
+import { AppProvider } from "./context/AppContext";
+import SignIn from "./components/views/Login";
+import Register from "./components/views/Register";
+import AppContext from "./context/AppContext";
+
 
 export default function App() {
+  const [isSigninPage, setSigninPage] = React.useState(true);
+  const appContext: any = React.useContext(AppContext);
+  
+
+  const handleGoToRegister = () => {
+    setSigninPage(false);
+  };
+  const handleGoToLogin = () => {
+    setSigninPage(true);
+  };
+
+  const value = {
+    isSigninPageOpened: isSigninPage,
+    handleGoToRegisterPage: handleGoToRegister,
+    handleGoToLoginPage: handleGoToLogin,
+  };
+
+  useEffect(() => {
+    console.log(isSigninPage)
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+      
+      <AppProvider value={value}>
+      <ButtonAppBar />
+      {appContext.isSigninPageOpened ? <SignIn /> : <Register />}
+      </AppProvider>
+
+      )}
+    
+  
+
