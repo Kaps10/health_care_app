@@ -9,9 +9,7 @@ import AppContext from "./context/AppContext";
 
 export default function App() {
   const [isSigninPage, setSigninPage] = React.useState(true);
-  const appContext: any = React.useContext(AppContext);
   
-
   const handleGoToRegister = () => {
     setSigninPage(false);
   };
@@ -33,7 +31,7 @@ export default function App() {
       
       <AppProvider value={value}>
       <ButtonAppBar />
-      {appContext.isSigninPageOpened ? <SignIn /> : <Register />}
+      {isSigninPage ? <SignIn /> : <Register />}
       </AppProvider>
 
       )}

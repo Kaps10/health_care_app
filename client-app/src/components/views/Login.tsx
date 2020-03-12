@@ -17,13 +17,13 @@ import AppContext from "../../context/AppContext";
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
   },
   avatar: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     backgroundColor: theme.palette.secondary.main
   },
   form: {
@@ -37,13 +37,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
-
   // need to use the global value
   const appContext: any = React.useContext(AppContext);
-  const [formData, setFormData] = React.useState({
-    emailAddress: "",
-    password: ""
-  });
+ 
 
 
 
@@ -67,14 +63,6 @@ export default function SignIn() {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
-            value={formData.emailAddress}
-            onChange={(event: any) => {
-              setFormData({
-                ...formData,
-                emailAddress: event.target.value
-              });
-            }}
           />
           <TextField
             variant="outlined"
@@ -85,19 +73,8 @@ export default function SignIn() {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
-            value={formData.password}
-            onChange={(event: any) => {
-              setFormData({
-                ...formData,
-                password: event.target.value
-              });
-            }}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+    
           <Button
             type="submit"
             fullWidth
@@ -107,12 +84,7 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+          <Grid container justify="flex-end">
             <Grid item>
               <Link
                 href="#"

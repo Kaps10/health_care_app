@@ -17,18 +17,18 @@ import { InputLabel, MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
   },
   avatar: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(1)
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
@@ -36,22 +36,17 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 200
+  },
+  typography: {
+    marginBottom: theme.spacing(2),
+  
   }
 }));
 
 export default function Register() {
   const classes = useStyles();
-
   // need to use the global value
   const appContext: any = React.useContext(AppContext);
-  const [formData, setFormData] = React.useState({
-    emailAddress: "",
-    userName: "",
-    password: "",
-    accountType: "Regular"
-  });
-
-  
 
   return (
     <Container component="main" maxWidth="xs">
@@ -60,7 +55,7 @@ export default function Register() {
         <Avatar className={classes.avatar}>
          
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" className={classes.typography} >
           Sign up
         </Typography>
         <form >
@@ -70,9 +65,22 @@ export default function Register() {
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
+                id="firstName"
+                label="First Name"
+                name="firstName"
+                autoComplete="uname"
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="uname"
               />
             </Grid>
 
@@ -100,7 +108,6 @@ export default function Register() {
                 autoComplete="current-password"
               />
             </Grid>
-            
             <Grid item xs={12}>
               <FormControl required className={classes.formControl}>
                 <InputLabel id="labelAccountType">
@@ -111,8 +118,8 @@ export default function Register() {
                   labelId="labelAccountType"
                   id="accountType"
                 >
-                  <MenuItem value="Regular">Regular</MenuItem>
-                  <MenuItem value="Student">Student</MenuItem>
+                  <MenuItem value="Regular">Nurse</MenuItem>
+                  <MenuItem value="Student">Patient</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -126,7 +133,7 @@ export default function Register() {
           >
             Sign Up
           </Button>
-          
+
           <Grid container justify="flex-end">
             <Grid item>
               <Link
