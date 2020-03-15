@@ -4,12 +4,10 @@ import "./App.css";
 import { AppProvider } from "./context/AppContext";
 import SignIn from "./components/views/Login";
 import Register from "./components/views/Register";
-import AppContext from "./context/AppContext";
-
 
 export default function App() {
   const [isSigninPage, setSigninPage] = React.useState(true);
-  
+
   const handleGoToRegister = () => {
     setSigninPage(false);
   };
@@ -20,21 +18,13 @@ export default function App() {
   const value = {
     isSigninPageOpened: isSigninPage,
     handleGoToRegisterPage: handleGoToRegister,
-    handleGoToLoginPage: handleGoToLogin,
+    handleGoToLoginPage: handleGoToLogin
   };
 
-  useEffect(() => {
-    console.log(isSigninPage)
-  }, []);
-
   return (
-      
-      <AppProvider value={value}>
+    <AppProvider value={value}>
       <ButtonAppBar />
       {isSigninPage ? <SignIn /> : <Register />}
-      </AppProvider>
-
-      )}
-    
-  
-
+    </AppProvider>
+  );
+}
