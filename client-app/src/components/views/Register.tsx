@@ -54,7 +54,8 @@ export default function Register() {
     accountType: "Nurse"
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     const res = fetch("http://localhost:8500/signup", {
       method: "POST",
       headers: {
