@@ -38,8 +38,7 @@ const useStyles = makeStyles(theme => ({
     minWidth: 200
   },
   typography: {
-    marginBottom: theme.spacing(2),
-  
+    marginBottom: theme.spacing(2)
   }
 }));
 
@@ -47,18 +46,43 @@ export default function Register() {
   const classes = useStyles();
   // need to use the global value
   const appContext: any = React.useContext(AppContext);
+  const [userInfoData, setUserInfoData] = React.useState({
+    firstName: "",
+    lastName: "",
+    userName: "",
+    password: "",
+    accountType: "Nurse"
+  });
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const res = fetch("http://localhost:8500/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userInfoData)
+    });
+    res
+      .then(data => data.json())
+      .then((data: any) => {
+        if (data.msg === 1) {
+          alert("registered successful");
+        } else {
+          alert(data.msg);
+        }
+      });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-         
-        </Avatar>
-        <Typography component="h1" variant="h5" className={classes.typography} >
+        <Avatar className={classes.avatar}></Avatar>
+        <Typography component="h1" variant="h5" className={classes.typography}>
           Sign up
         </Typography>
-        <form >
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -68,7 +92,13 @@ export default function Register() {
                 id="firstName"
                 label="First Name"
                 name="firstName"
-                autoComplete="uname"
+                value={userInfoData.firstName}
+                onChange={(event: any) => {
+                  setUserInfoData({
+                    ...userInfoData,
+                    firstName: event.target.value
+                  });
+                }}
               />
             </Grid>
 
@@ -80,7 +110,13 @@ export default function Register() {
                 id="lastName"
                 label="Last Name"
                 name="lastName"
-                autoComplete="uname"
+                value={userInfoData.lastName}
+                onChange={(event: any) => {
+                  setUserInfoData({
+                    ...userInfoData,
+                    lastName: event.target.value
+                  });
+                }}
               />
             </Grid>
 
@@ -92,7 +128,13 @@ export default function Register() {
                 id="userName"
                 label="User Name"
                 name="userName"
-                autoComplete="uname"
+                value={userInfoData.userName}
+                onChange={(event: any) => {
+                  setUserInfoData({
+                    ...userInfoData,
+                    userName: event.target.value
+                  });
+                }}
               />
             </Grid>
 
@@ -105,7 +147,13 @@ export default function Register() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                value={userInfoData.password}
+                onChange={(event: any) => {
+                  setUserInfoData({
+                    ...userInfoData,
+                    password: event.target.value
+                  });
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -117,9 +165,16 @@ export default function Register() {
                   required
                   labelId="labelAccountType"
                   id="accountType"
+                  value={userInfoData.accountType}
+                  onChange={(event: any) => {
+                    setUserInfoData({
+                      ...userInfoData,
+                      accountType: event.target.value
+                    });
+                  }}
                 >
-                  <MenuItem value="Regular">Nurse</MenuItem>
-                  <MenuItem value="Student">Patient</MenuItem>
+                  <MenuItem value="Nurse">Nurse</MenuItem>
+                  <MenuItem value="Patient">Patient</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -147,8 +202,7 @@ export default function Register() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-      </Box>
+      <Box mt={5}></Box>
     </Container>
   );
 }

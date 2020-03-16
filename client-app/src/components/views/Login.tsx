@@ -3,8 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -13,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AppContext from "../../context/AppContext";
-
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -39,30 +36,55 @@ export default function SignIn() {
   const classes = useStyles();
   // need to use the global value
   const appContext: any = React.useContext(AppContext);
- 
+  const [loginData, setLoginData] = React.useState({
+    userName: "",
+    password: ""
+  });
 
-
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const res = fetch("http://localhost:8500/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(loginData)
+    });
+    res
+      .then(data => data.json())
+      .then((data: any) => {
+        if (data.msg === 1) {
+          alert("login successful");
+        } else {
+          alert(data.msg);
+        }
+      });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-        
-        </Avatar>
+        <Avatar className={classes.avatar}></Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form >
+        <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="userName"
+            label="User Name"
+            name="userName"
+            value={loginData.userName}
+            onChange={(event: any) => {
+              setLoginData({
+                ...loginData,
+                userName: event.target.value
+              });
+            }}
           />
           <TextField
             variant="outlined"
@@ -73,8 +95,15 @@ export default function SignIn() {
             label="Password"
             type="password"
             id="password"
+            value={loginData.password}
+            onChange={(event: any) => {
+              setLoginData({
+                ...loginData,
+                password: event.target.value
+              });
+            }}
           />
-    
+
           <Button
             type="submit"
             fullWidth
@@ -97,9 +126,7 @@ export default function SignIn() {
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        
-      </Box>
+      <Box mt={8}></Box>
     </Container>
   );
 }
