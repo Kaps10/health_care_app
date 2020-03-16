@@ -67,7 +67,7 @@ export default function Register() {
       .then(data => data.json())
       .then((data: any) => {
         if (data.msg === 1) {
-          console.log("registered successful");
+          alert("registered successful");
         } else {
           alert(data.msg);
         }

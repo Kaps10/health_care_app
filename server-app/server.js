@@ -5,6 +5,7 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 
 const signupController = require("./controllers/signupController");
+const signinController = require("./controllers/signinController");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -13,8 +14,10 @@ app.get("/", function(req, res) {
   res.send("Hello World!");
 });
 
-// registration api
+// call registration api
 app.post("/signup", signupController.signupRender);
+
+app.post("/signin", signinController.signupRender);
 
 app.listen(8500, function() {
   console.log("Server app listening on http://localhost:8500/");

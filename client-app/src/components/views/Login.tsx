@@ -36,6 +36,30 @@ export default function SignIn() {
   const classes = useStyles();
   // need to use the global value
   const appContext: any = React.useContext(AppContext);
+  const [loginData, setLoginData] = React.useState({
+    userName: "",
+    password: ""
+  });
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const res = fetch("http://localhost:8500/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(loginData)
+    });
+    res
+      .then(data => data.json())
+      .then((data: any) => {
+        if (data.msg === 1) {
+          alert("login successful");
+        } else {
+          alert(data.msg);
+        }
+      });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -45,16 +69,22 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="userName"
+            label="User Name"
+            name="userName"
+            value={loginData.userName}
+            onChange={(event: any) => {
+              setLoginData({
+                ...loginData,
+                userName: event.target.value
+              });
+            }}
           />
           <TextField
             variant="outlined"
@@ -65,6 +95,13 @@ export default function SignIn() {
             label="Password"
             type="password"
             id="password"
+            value={loginData.password}
+            onChange={(event: any) => {
+              setLoginData({
+                ...loginData,
+                password: event.target.value
+              });
+            }}
           />
 
           <Button
