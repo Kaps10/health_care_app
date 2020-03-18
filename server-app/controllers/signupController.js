@@ -2,10 +2,9 @@ var client = require("../repo/mongodbConnection");
 
 exports.signupRender = (req, res) => {
   const userInfoData = req.body;
-  console.log(userInfoData);
   // get userCollection
   const userCollection = client.db("comp308Project").collection("users");
-  // check if the email exsits in db
+  // check if the userName exsits in db
   userCollection.findOne({ userName: userInfoData.userName }).then(
     data => {
       if (!data) {

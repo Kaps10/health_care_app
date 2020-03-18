@@ -17,7 +17,8 @@ app.get("/", function(req, res) {
 // call registration api
 app.post("/signup", signupController.signupRender);
 
-app.post("/signin", signinController.signupRender);
+// call login api
+app.post("/signin", signinController.signinRender);
 
 app.listen(8500, function() {
   console.log("Server app listening on http://localhost:8500/");

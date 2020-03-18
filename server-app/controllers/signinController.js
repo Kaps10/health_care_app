@@ -1,6 +1,6 @@
 var client = require("../repo/mongodbConnection");
 
-exports.signupRender = (req, res) => {
+exports.signinRender = (req, res) => {
   const loginData = req.body;
   console.log(loginData);
   // get userCollection
