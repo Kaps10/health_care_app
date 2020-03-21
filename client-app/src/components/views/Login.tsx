@@ -54,7 +54,8 @@ export default function SignIn() {
       .then(data => data.json())
       .then((data: any) => {
         if (data.msg === 1) {
-          alert("login successful");
+          appContext.handleGetUserData(data);
+          appContext.handleSignedIn();
         } else {
           alert(data.msg);
         }
