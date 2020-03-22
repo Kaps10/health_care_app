@@ -38,16 +38,18 @@ const useStyles = makeStyles(theme => ({
 export default function EnterMotiTips() {
   const classes = useStyles();
   const [motivationalTips, setMotivationalTips] = React.useState({
-    tips: ""
+    tips: "",
+    sendTime: Date.now()
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     const res = fetch("http://localhost:8500/enterMotiTips", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ tips: motivationalTips.tips })
+      body: JSON.stringify(motivationalTips)
     });
     res
       .then(data => data.json())
@@ -79,7 +81,8 @@ export default function EnterMotiTips() {
                 onChange={(event: any) => {
                   setMotivationalTips({
                     ...motivationalTips,
-                    tips: event.target.value
+                    tips: event.target.value,
+                    sendTime: Date.now()
                   });
                 }}
               />
