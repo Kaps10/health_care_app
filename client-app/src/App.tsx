@@ -59,8 +59,6 @@ export default function App() {
         (<NurseHomepage />):
         (<PatientHomepage/>)): 
         (<AuthPage />)}
-
-
       
     </AppProvider>
   );
