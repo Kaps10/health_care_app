@@ -10,8 +10,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AppContext from "../../context/AppContext";
 
-
-
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(3),
@@ -47,7 +45,7 @@ export default function EnterVitalSigns() {
     bodyTemperature: "",
     heartRate: "",
     bloodPressure: "",
-    respiratoryRate: "",
+    respiratoryRate: ""
   });
 
   const handleSubmit = (e: any) => {
@@ -75,7 +73,7 @@ export default function EnterVitalSigns() {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5" className={classes.typography}>
-         Enter vital signs
+          Enter Vital Signs
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -89,7 +87,7 @@ export default function EnterVitalSigns() {
                 name="bodyTemperature"
                 value={vitalSigns.bodyTemperature}
                 onChange={(event: any) => {
-                    setVitalSigns({
+                  setVitalSigns({
                     ...vitalSigns,
                     bodyTemperature: event.target.value
                   });
@@ -107,7 +105,7 @@ export default function EnterVitalSigns() {
                 name="heartRate"
                 value={vitalSigns.heartRate}
                 onChange={(event: any) => {
-                    setVitalSigns({
+                  setVitalSigns({
                     ...vitalSigns,
                     heartRate: event.target.value
                   });
@@ -125,7 +123,7 @@ export default function EnterVitalSigns() {
                 name="bloodPressure"
                 value={vitalSigns.bloodPressure}
                 onChange={(event: any) => {
-                    setVitalSigns({
+                  setVitalSigns({
                     ...vitalSigns,
                     bloodPressure: event.target.value
                   });
@@ -143,14 +141,13 @@ export default function EnterVitalSigns() {
                 id="respiratoryRate"
                 value={vitalSigns.respiratoryRate}
                 onChange={(event: any) => {
-                    setVitalSigns({
+                  setVitalSigns({
                     ...vitalSigns,
                     respiratoryRate: event.target.value
                   });
                 }}
               />
             </Grid>
-            
           </Grid>
           <Button
             type="submit"
