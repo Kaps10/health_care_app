@@ -40,26 +40,23 @@ export default function MotivationalTips() {
   const classes = useStyles();
   // need to use the global value
   const appContext: any = React.useContext(AppContext);
-  const [motivationalTips, setMotivationalTips] = React.useState("");
+  const [motivationalTips, setMotivationalTips] = React.useState({
+    tips: ""
+  });
 
-  const handleSubmit = (e: any) => {
-    // e.preventDefault();
-    // const res = fetch("http://localhost:8500/signup", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(userInfoData)
-    // });
-    // res
-    //   .then(data => data.json())
-    //   .then((data: any) => {
-    //     if (data.msg === 1) {
-    //       appContext.handleGoToLoginPage();
-    //     } else {
-    //       alert(data.msg);
-    //     }
-    //   });
+  const handleSubmit = () => {
+    const res = fetch("http://localhost:8500/enterMotiTips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ tips: motivationalTips.tips })
+    });
+    res
+      .then(data => data.json())
+      .then((data: any) => {
+        alert(data.msg);
+      });
   };
 
   return (
@@ -81,9 +78,12 @@ export default function MotivationalTips() {
                 id="motivationalTips"
                 label="Motivational Tips"
                 name="motivationalTips"
-                value={motivationalTips}
+                value={motivationalTips.tips}
                 onChange={(event: any) => {
-                  setMotivationalTips(event.target.value);
+                  setMotivationalTips({
+                    ...motivationalTips,
+                    tips: event.target.value
+                  });
                 }}
               />
             </Grid>
