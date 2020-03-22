@@ -7,7 +7,6 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import AppContext from "../../context/AppContext";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -36,10 +35,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MotivationalTips() {
+export default function EnterMotiTips() {
   const classes = useStyles();
-  // need to use the global value
-  const appContext: any = React.useContext(AppContext);
   const [motivationalTips, setMotivationalTips] = React.useState({
     tips: ""
   });

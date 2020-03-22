@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import ButtonAppBar from "./Appbar";
 import "./App.css";
 import { AppProvider } from "./context/AppContext";
-import AuthPage from "./components/views/AuthPage";
-import NurseHomepage from "./components/views/NurseHomepage";
-import PatientHomepage from "./components/views/PatientHomepage";
+import AuthPage from "./components/views/AuthentificationPages/AuthPage";
+import NurseHomepage from "./components/views/NursePages/NurseHomepage";
+import PatientHomepage from "./components/views/PatientPages/PatientHomepage";
 
 export default function App() {
   const [isSigninPage, setSigninPage] = React.useState(true);
