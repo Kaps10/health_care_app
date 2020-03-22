@@ -12,7 +12,7 @@ export default function App() {
   const [userData, setUserData] = React.useState({
     _id: "",
     firstName: "",
-    lastName:"",
+    lastName: "",
     userName: "",
     password: "",
     accountType: ""
@@ -27,13 +27,17 @@ export default function App() {
   const handleSigned = () => {
     setSignedin(true);
   };
+  const handleLogout = () => {
+    setSignedin(false);
+    handleGoToLogin();
+  };
 
   const handleTransUserData = (data: any) => {
     setUserData({
       _id: data._id,
       firstName: data.firstName,
       lastName: data.lastName,
-      userName:data.userName,
+      userName: data.userName,
       password: data.password,
       accountType: data.accountType
     });
@@ -46,20 +50,22 @@ export default function App() {
     handleGoToRegisterPage: handleGoToRegister,
     handleGoToLoginPage: handleGoToLogin,
     handleGetUserData: handleTransUserData,
-    handleSignedIn: handleSigned
-    
+    handleSignedIn: handleSigned,
+    handleLogoutToLoginPage: handleLogout
   };
 
   return (
     <AppProvider value={value}>
       <ButtonAppBar />
       {isSigned ? (
-        (userData.accountType == "Nurse")
-        ?
-        (<NurseHomepage />):
-        (<PatientHomepage/>)): 
-        (<AuthPage />)}
-      
+        userData.accountType == "Nurse" ? (
+          <NurseHomepage />
+        ) : (
+          <PatientHomepage />
+        )
+      ) : (
+        <AuthPage />
+      )}
     </AppProvider>
   );
 }
