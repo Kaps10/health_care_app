@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -38,129 +38,43 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function CheckVitalSigns() {
-  const classes = useStyles();
-  // need to use the global value
   const appContext: any = React.useContext(AppContext);
   const [vitalSigns, setVitalSigns] = React.useState({
-    bodyTemperature: "",
-    heartRate: "",
-    bloodPressure: "",
-    respiratoryRate: ""
+
+    vitalSignsarray: []
   });
 
-  const handleSubmit = (e: any) => {
-    // e.preventDefault();
-    // const res = fetch("http://localhost:8500/signup", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(userInfoData)
-    // });
-    // res
-    //   .then(data => data.json())
-    //   .then((data: any) => {
-    //     if (data.msg === 1) {
-    //       appContext.handleGoToLoginPage();
-    //     } else {
-    //       alert(data.msg);
-    //     }
-    //   });
+  useEffect(() => {
+    retrieveVitalSigns();
+  }, []);
+
+  const retrieveVitalSigns = () => {
+    console.log("123")
+    const res = fetch("http://localhost:8500/retrieveVitalSigns", {
+     
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ userId: appContext.getUserData._id })
+    });
+    res
+      .then(data => data.json())
+      .then((data: any) => {
+        console.log(data);
+        if (data.msg == 1) {
+          setVitalSigns({ 
+            vitalSignsarray: data,
+           });
+        } else {
+          alert(data.msg);
+        }
+      });
   };
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h5" className={classes.typography}>
-          Check vital signs
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="bodyTemperature"
-                label="bodyTemperature"
-                name="bodyTemperature"
-                value={vitalSigns.bodyTemperature}
-                onChange={(event: any) => {
-                  setVitalSigns({
-                    ...vitalSigns,
-                    bodyTemperature: event.target.value
-                  });
-                }}
-              />
-            </Grid>
+ return (
 
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="heartRate"
-                label="heartRate"
-                name="heartRate"
-                value={vitalSigns.heartRate}
-                onChange={(event: any) => {
-                  setVitalSigns({
-                    ...vitalSigns,
-                    heartRate: event.target.value
-                  });
-                }}
-              />
-            </Grid>
+<p> {vitalSigns.vitalSignsarray} </p>
 
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="bloodPressure"
-                label="bloodPressure"
-                name="bloodPressure"
-                value={vitalSigns.bloodPressure}
-                onChange={(event: any) => {
-                  setVitalSigns({
-                    ...vitalSigns,
-                    bloodPressure: event.target.value
-                  });
-                }}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="respiratoryRate"
-                label="respiratoryRate"
-                id="respiratoryRate"
-                value={vitalSigns.respiratoryRate}
-                onChange={(event: any) => {
-                  setVitalSigns({
-                    ...vitalSigns,
-                    respiratoryRate: event.target.value
-                  });
-                }}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Update
-          </Button>
-        </form>
-      </div>
-      <Box mt={5}></Box>
-    </Container>
-  );
+)
 }

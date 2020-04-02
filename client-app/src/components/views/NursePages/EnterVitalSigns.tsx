@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AppContext from "../../../context/AppContext";
+import { stringify } from "querystring";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -42,6 +43,7 @@ export default function EnterVitalSigns() {
   // need to use the global value
   const appContext: any = React.useContext(AppContext);
   const [vitalSigns, setVitalSigns] = React.useState({
+    userId: appContext.getUserData._id,
     bodyTemperature: "",
     heartRate: "",
     bloodPressure: "",
@@ -49,23 +51,20 @@ export default function EnterVitalSigns() {
   });
 
   const handleSubmit = (e: any) => {
-    // e.preventDefault();
-    // const res = fetch("http://localhost:8500/signup", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(userInfoData)
-    // });
-    // res
-    //   .then(data => data.json())
-    //   .then((data: any) => {
-    //     if (data.msg === 1) {
-    //       appContext.handleGoToLoginPage();
-    //     } else {
-    //       alert(data.msg);
-    //     }
-    //   });
+    e.preventDefault();
+    console.log(vitalSigns)
+    const res = fetch("http://localhost:8500/saveVitalSigns", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(vitalSigns)
+    });
+    res
+      .then(data => data.json())
+      .then((data: any) => {
+          alert(data.msg);
+      });
   };
 
   return (
