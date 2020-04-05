@@ -15,31 +15,31 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { InputLabel, MenuItem } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 200
+    minWidth: 200,
   },
   typography: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export default function Register() {
@@ -51,7 +51,7 @@ export default function Register() {
     lastName: "",
     userName: "",
     password: "",
-    accountType: "Nurse"
+    accountType: "Nurse",
   });
 
   const handleSubmit = (e: any) => {
@@ -59,12 +59,12 @@ export default function Register() {
     const res = fetch("http://localhost:8500/signup", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(userInfoData)
+      body: JSON.stringify(userInfoData),
     });
     res
-      .then(data => data.json())
+      .then((data) => data.json())
       .then((data: any) => {
         if (data.msg === 1) {
           appContext.handleGoToLoginPage();
@@ -96,7 +96,7 @@ export default function Register() {
                 onChange={(event: any) => {
                   setUserInfoData({
                     ...userInfoData,
-                    firstName: event.target.value
+                    firstName: event.target.value,
                   });
                 }}
               />
@@ -114,7 +114,7 @@ export default function Register() {
                 onChange={(event: any) => {
                   setUserInfoData({
                     ...userInfoData,
-                    lastName: event.target.value
+                    lastName: event.target.value,
                   });
                 }}
               />
@@ -132,7 +132,7 @@ export default function Register() {
                 onChange={(event: any) => {
                   setUserInfoData({
                     ...userInfoData,
-                    userName: event.target.value
+                    userName: event.target.value,
                   });
                 }}
               />
@@ -151,7 +151,7 @@ export default function Register() {
                 onChange={(event: any) => {
                   setUserInfoData({
                     ...userInfoData,
-                    password: event.target.value
+                    password: event.target.value,
                   });
                 }}
               />
@@ -169,7 +169,7 @@ export default function Register() {
                   onChange={(event: any) => {
                     setUserInfoData({
                       ...userInfoData,
-                      accountType: event.target.value
+                      accountType: event.target.value,
                     });
                   }}
                 >

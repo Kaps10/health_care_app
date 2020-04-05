@@ -1,47 +1,27 @@
 import React, { useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-//import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import AppContext from "../../../context/AppContext";
+import {
+  TableContainer,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+const useStyles = makeStyles((theme) => ({
+  table: {
+    minWidth: 650,
   },
-  avatar: {
-    margin: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200
-  },
-  typography: {
-    marginBottom: theme.spacing(2)
-  }
 }));
 
 export default function CheckVitalSigns() {
+  const classes = useStyles();
   const appContext: any = React.useContext(AppContext);
   const [vitalSigns, setVitalSigns] = React.useState({
-
-    vitalSignsarray: []
+    vitalSignsarray: [],
   });
 
   useEffect(() => {
@@ -49,32 +29,54 @@ export default function CheckVitalSigns() {
   }, []);
 
   const retrieveVitalSigns = () => {
-    console.log("123")
     const res = fetch("http://localhost:8500/retrieveVitalSigns", {
-     
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId: appContext.getUserData._id })
+      body: JSON.stringify({ userId: appContext.getUserData._id }),
     });
     res
-      .then(data => data.json())
+      .then((data) => data.json())
       .then((data: any) => {
         console.log(data);
         if (data.msg == 1) {
-          setVitalSigns({ 
-            vitalSignsarray: data,
-           });
+          setVitalSigns({
+            ...vitalSigns,
+            vitalSignsarray: data.dataArr,
+          });
         } else {
           alert(data.msg);
         }
       });
   };
 
- return (
-
-<p> {vitalSigns.vitalSignsarray} </p>
-
-)
+  return (
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Index</TableCell>
+            <TableCell align="right">Body Temperature</TableCell>
+            <TableCell align="right">Heart Rate</TableCell>
+            <TableCell align="right">Blood Pressure</TableCell>
+            <TableCell align="right">Respiratory Rate</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {vitalSigns.vitalSignsarray.map((item: any, index) => (
+            <TableRow key={index}>
+              <TableCell component="th" scope="row">
+                {index + 1}
+              </TableCell>
+              <TableCell align="right">{item.bodyTemperature}</TableCell>
+              <TableCell align="right">{item.heartRate}</TableCell>
+              <TableCell align="right">{item.bloodPressure}</TableCell>
+              <TableCell align="right">{item.respiratoryRate}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
