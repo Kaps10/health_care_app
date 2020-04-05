@@ -10,7 +10,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import AppContext from "../../context/AppContext";
+import AppContext from "../../../context/AppContext";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -54,7 +54,8 @@ export default function SignIn() {
       .then(data => data.json())
       .then((data: any) => {
         if (data.msg === 1) {
-          alert("login successful");
+          appContext.handleGetUserData(data);
+          appContext.handleSignedIn();
         } else {
           alert(data.msg);
         }

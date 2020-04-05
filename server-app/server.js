@@ -6,6 +6,10 @@ var bodyParser = require("body-parser");
 
 const signupController = require("./controllers/signupController");
 const signinController = require("./controllers/signinController");
+const enterMotiTipsController = require("./controllers/enterMotiTipsController");
+const retrieveMotiTipsController = require("./controllers/retrieveMotiTipsController");
+const enterViatlSignsController = require("./controllers/enterVitalSigns")
+const retrieveViatlSignsController = require("./controllers/retrieveVitalSigns")
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,6 +23,14 @@ app.post("/signup", signupController.signupRender);
 
 // call login api
 app.post("/signin", signinController.signinRender);
+
+app.post("/enterMotiTips", enterMotiTipsController.enterMotiTipsRender);
+
+app.get("/retrieveMotiTips", retrieveMotiTipsController.retrieveMotiTipsRender);
+
+app.post("/saveVitalSigns", enterViatlSignsController.enterViatlSignsRender )
+
+app.post("/retrieveVitalSigns", retrieveViatlSignsController.retrieveVitalSignsRender )
 
 app.listen(8500, function() {
   console.log("Server app listening on http://localhost:8500/");
