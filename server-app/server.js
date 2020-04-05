@@ -8,8 +8,9 @@ const signupController = require("./controllers/signupController");
 const signinController = require("./controllers/signinController");
 const enterMotiTipsController = require("./controllers/enterMotiTipsController");
 const retrieveMotiTipsController = require("./controllers/retrieveMotiTipsController");
-const enterViatlSignsController = require("./controllers/enterVitalSigns")
-const retrieveViatlSignsController = require("./controllers/retrieveVitalSigns")
+const enterViatlSignsController = require("./controllers/enterVitalSigns");
+const retrieveViatlSignsController = require("./controllers/retrieveVitalSigns");
+const retrieveVideosController = require('./controllers/retrieveVideosController');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,9 +29,10 @@ app.post("/enterMotiTips", enterMotiTipsController.enterMotiTipsRender);
 
 app.get("/retrieveMotiTips", retrieveMotiTipsController.retrieveMotiTipsRender);
 
-app.post("/saveVitalSigns", enterViatlSignsController.enterViatlSignsRender )
+app.post("/saveVitalSigns", enterViatlSignsController.enterViatlSignsRender );
 
-app.post("/retrieveVitalSigns", retrieveViatlSignsController.retrieveVitalSignsRender )
+app.post("/retrieveVitalSigns", retrieveViatlSignsController.retrieveVitalSignsRender );
+app.get("/retrieveVideos",retrieveVideosController.retrieveVideos);
 
 app.listen(8500, function() {
   console.log("Server app listening on http://localhost:8500/");
