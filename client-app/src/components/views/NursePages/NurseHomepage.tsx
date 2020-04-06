@@ -98,11 +98,9 @@ export default function NurseHomepage() {
         onChange={handleChange}
         aria-label="disabled tabs example"
       > 
- 
         <Tab label="Enter Vital Signs" />
         <Tab label="Check Vital Signs" />
         <Tab label="Daily Motivational Tips" />
-  
       </Tabs>
       <TabPanel value={value} index={0}>
       <div>
@@ -120,9 +118,33 @@ export default function NurseHomepage() {
         <EnterVitalSigns />
       </TabPanel>
       <TabPanel value={value} index={1}>
+      <div>
+      {
+        altets.map(
+          (alert)=>(
+          <Alert key={alert._id} severity="error">
+            <AlertTitle>Emergency Alert</AlertTitle>
+              This Emergency alert from {alert.patientUserName} — check it out! 
+              <Button variant="contained" color="secondary" onClick={()=>handleAlert(alert._id)} > Answer Alert</Button>
+          </Alert>
+          ))
+      }
+    </div>
         <CheckVitalSigns />
       </TabPanel>
       <TabPanel value={value} index={2}>
+      <div>
+      {
+        altets.map(
+          (alert)=>(
+          <Alert key={alert._id} severity="error">
+            <AlertTitle>Emergency Alert</AlertTitle>
+              This Emergency alert from {alert.patientUserName} — check it out! 
+              <Button variant="contained" color="secondary" onClick={()=>handleAlert(alert._id)} > Answer Alert</Button>
+          </Alert>
+          ))
+      }
+    </div>
         <EnterMotiTips />
       </TabPanel>
 

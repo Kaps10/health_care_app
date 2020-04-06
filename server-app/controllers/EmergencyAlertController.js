@@ -59,23 +59,5 @@ exports.answerAlert=(req, res) =>{
 		console.log(collection);
   });
 };
-  //   {upsert: true})
-  // .then((data) => {
-  //       if (!data) {
-  //         res.json({
-  //           msg: "No Alerts for now",
-  //         });
-  //       } else {
-  //         console.log(res);
-  //         res.json({
-  //           msg: 1,
-  //         });
-  //       }
-  //     },
-  //     (err) => {
-  //       console.log("err" + err);
-  //     });
-  // };
-
 
   
