@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
 export default function SendEmergencyAlert() {
   const stypeClass = useStyles();
   const appContext: any = React.useContext(AppContext);
-  const requestData = {patientId:appContext.getUserData._id,time:Date.now(),status:true,responderId:null};
+  console.log(appContext.getUserData);
+  const requestData = {patientId:appContext.getUserData._id,patientUserName:appContext.getUserData.userName,time:Date.now(),status:true,responderId:null};
   const handleAlert = (e: any) => {
     e.preventDefault();
     const res = fetch("http://localhost:8500/sendEmergencyAlert", {

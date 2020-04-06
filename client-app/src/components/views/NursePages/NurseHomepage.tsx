@@ -1,10 +1,12 @@
-import React from "react";
+import React ,{useEffect}from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { Typography, Box } from "@material-ui/core";
+import { Typography, Box,Button } from "@material-ui/core";
+import { AlertTitle, Alert} from "@material-ui/lab";
 import EnterVitalSigns from "./EnterVitalSigns";
 import CheckVitalSigns from "./CheckVitalSigns";
 import EnterMotiTips from "./EnterMotiTips";
+import AppContext from "../../../context/AppContext";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -31,12 +33,63 @@ function TabPanel(props: TabPanelProps) {
 
 export default function NurseHomepage() {
   const [value, setValue] = React.useState(0);
+  const appContext: any = React.useContext(AppContext);
+  const [altets,setAlerts] = React.useState(
+    [{_id:"",patientId:"",patientUserName:"",status:true,time:Date.now()}]
+  );
+  useEffect(() => { 
+    retrieveAlerts();
+  }, []);
+   
+//retrive alert 
+  const retrieveAlerts = () => {
+    const res = fetch("http://localhost:8500/getAllActiveEAlert", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    res
+      .then((data) => data.json())
+      .then((data: any) => {
+        console.log(data);
+        if (data.msg === 1) {
+          console.log(data.dataArr[0]);
+          setAlerts( data.dataArr);
+        } else {
+          alert(data.msg);
+        }
+      });
+  };
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
 
+
+  var handleAlert = (alertId:string) => {
+    const res = fetch("http://localhost:8500/answerAlert", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({id:alertId,nurseId:appContext.getUserData._id})
+    });
+    res
+      .then(data => data.json())
+      .then((data: any) => {
+        if (data.msg === 1) {
+           alert("Check the patient Now !");
+        } else {
+          alert(data.msg);
+        }
+      });
+  };
+
+
+
   return (
+
     <div>
       <Tabs
         value={value}
@@ -44,12 +97,26 @@ export default function NurseHomepage() {
         textColor="primary"
         onChange={handleChange}
         aria-label="disabled tabs example"
-      >
+      > 
+ 
         <Tab label="Enter Vital Signs" />
         <Tab label="Check Vital Signs" />
         <Tab label="Daily Motivational Tips" />
+  
       </Tabs>
       <TabPanel value={value} index={0}>
+      <div>
+      {
+        altets.map(
+          (alert)=>(
+          <Alert key={alert._id} severity="error">
+            <AlertTitle>Emergency Alert</AlertTitle>
+              This Emergency alert from {alert.patientUserName} — check it out! 
+              <Button variant="contained" color="secondary" onClick={()=>handleAlert(alert._id)} > Answer Alert</Button>
+          </Alert>
+          ))
+      }
+    </div>
         <EnterVitalSigns />
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -58,6 +125,7 @@ export default function NurseHomepage() {
       <TabPanel value={value} index={2}>
         <EnterMotiTips />
       </TabPanel>
-    </div>
+
+     </div>
   );
 }

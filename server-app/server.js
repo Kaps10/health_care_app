@@ -35,7 +35,8 @@ app.post("/saveVitalSigns", enterViatlSignsController.enterViatlSignsRender );
 app.post("/retrieveVitalSigns", retrieveViatlSignsController.retrieveVitalSignsRender );
 app.get("/retrieveVideos",retrieveVideosController.retrieveVideos);
 app.post('/sendEmergencyAlert',sendEmergencyAlertCtrler.sendEAlert);
-
+app.get('/getAllActiveEAlert',sendEmergencyAlertCtrler.getAllActiveEAlert);
+app.post('/answerAlert',sendEmergencyAlertCtrler.answerAlert);
 app.listen(8500, function() {
   console.log("Server app listening on http://localhost:8500/");
 });
