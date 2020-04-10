@@ -54,7 +54,7 @@ export default function NurseHomepage() {
       .then((data: any) => {
         console.log(data);
         if (data.msg === 1) {
-          console.log(data.dataArr[0]);
+          // console.log(data.dataArr[0]);
           setAlerts( data.dataArr);
         } else {
           alert(data.msg);
@@ -80,6 +80,7 @@ export default function NurseHomepage() {
       .then((data: any) => {
         if (data.msg === 1) {
            alert("Check the patient Now !");
+           retrieveAlerts();
         } else {
           alert(data.msg);
         }

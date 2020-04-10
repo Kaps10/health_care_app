@@ -54,7 +54,11 @@ exports.answerAlert=(req, res) =>{
   var data = { $set:{status:false,responderId:nurseId} };
   client.db("comp308Project").collection("EAlerts")
   .updateOne(query,data,(err , collection) => {
-		if(err) throw err;
+    if(err) throw err;
+    else
+    res.json({
+      msg: 1
+    });
 		console.log("Record updated successfully");
 		console.log(collection);
   });
