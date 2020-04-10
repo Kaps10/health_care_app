@@ -1,13 +1,13 @@
 const MongoClient = require("mongodb").MongoClient;
 const uri =
-  "mongodb+srv://db-access:Mip9qbS1B42vagEQ@cluster0-ssdog.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://DB_Access:JkXqUQofPbQ5ivxa@cluster0-frq1i.mongodb.net/test?retryWrites=true&w=majority";
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
-client.connect(err => {
+client.connect((err) => {
   if (err) {
     console.log("unable to connect to db");
   } else {
