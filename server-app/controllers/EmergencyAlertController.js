@@ -51,7 +51,7 @@ exports.answerAlert=(req, res) =>{
   let alertId = req.body.id;
   let nurseId = req.body.nurseId;
   var query = { _id : ObjectId(alertId) };
-  var data = { $set:{status:false,responderId:nurseId} }
+  var data = { $set:{status:false,responderId:nurseId} };
   client.db("comp308Project").collection("EAlerts")
   .updateOne(query,data,(err , collection) => {
 		if(err) throw err;

@@ -12,7 +12,7 @@ const enterViatlSignsController = require("./controllers/enterVitalSigns");
 const retrieveViatlSignsController = require("./controllers/retrieveVitalSigns");
 const retrieveVideosController = require('./controllers/retrieveVideosController');
 const sendEmergencyAlertCtrler = require('./controllers/EmergencyAlertController');
-
+const SymptomCtrler = require('./controllers/SymptomDiagnosisController');
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -37,6 +37,7 @@ app.get("/retrieveVideos",retrieveVideosController.retrieveVideos);
 app.post('/sendEmergencyAlert',sendEmergencyAlertCtrler.sendEAlert);
 app.get('/getAllActiveEAlert',sendEmergencyAlertCtrler.getAllActiveEAlert);
 app.post('/answerAlert',sendEmergencyAlertCtrler.answerAlert);
+app.post('/sendSymptomList',SymptomCtrler.sendSymptomList);
 app.listen(8500, function() {
   console.log("Server app listening on http://localhost:8500/");
 });
