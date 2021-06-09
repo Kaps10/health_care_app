@@ -1,2 +1,1 @@
-# Group10_COMP308Project
- Group10_COMP308Project
+Health Care Application - MERN Stack
