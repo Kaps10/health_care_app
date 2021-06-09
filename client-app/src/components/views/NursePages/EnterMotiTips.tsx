@@ -62,7 +62,7 @@ export default function EnterMotiTips() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5" className={classes.typography}>
+        <Typography style={{ fontFamily: "georgia", fontWeight:'bold',color:'black'}} component="h1" variant="h5" className={classes.typography}>
           Enter Daily Motivational Tips
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
@@ -88,7 +88,7 @@ export default function EnterMotiTips() {
               />
             </Grid>
           </Grid>
-          <Button
+          <Button style={{color:'black',fontFamily:'georgia',backgroundColor:'darkOrange',fontWeight:'bold'}}
             type="submit"
             fullWidth
             variant="contained"

@@ -6,7 +6,7 @@ exports.retrieveVitalSignsRender = (req, res) => {
     .collection("vitalSigns");
   // check if the email and password are right
   vitalSignsCollection
-    .find({ userId: req.body.userId })
+    .find()
     .toArray()
     .then(
       (data) => {

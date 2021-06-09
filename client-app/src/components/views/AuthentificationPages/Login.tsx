@@ -1,5 +1,4 @@
 import React from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -11,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AppContext from "../../../context/AppContext";
+import { InputLabel, MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -18,10 +18,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -63,49 +59,65 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" >
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}></Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Typography component="h1" variant="h5" style={{ fontWeight: "bold", fontFamily: "georgia" }}>
+          Sign In
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="userName"
-            label="User Name"
-            name="userName"
-            value={loginData.userName}
-            onChange={(event: any) => {
-              setLoginData({
-                ...loginData,
-                userName: event.target.value
-              });
-            }}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            value={loginData.password}
-            onChange={(event: any) => {
-              setLoginData({
-                ...loginData,
-                password: event.target.value
-              });
-            }}
-          />
 
+          <Grid container spacing={2}>
+
+            <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Username:</InputLabel>
+              <br>
+
+              </br>
+              <TextField
+                style={{ fontWeight: "bold", fontFamily: "georgia" }}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="userName"
+                name="userName"
+                value={loginData.userName}
+                onChange={(event: any) => {
+                  setLoginData({
+                    ...loginData,
+                    userName: event.target.value
+                  });
+                }}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Password:</InputLabel>
+              <br>
+
+              </br>
+              <TextField
+                style={{ fontWeight: "bold", fontFamily: "georgia" }}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                type="password"
+                id="password"
+                value={loginData.password}
+                onChange={(event: any) => {
+                  setLoginData({
+                    ...loginData,
+                    password: event.target.value
+                  });
+                }}
+              />
+            </Grid>
+          </Grid>
           <Button
+            style={{ color: "black", fontFamily: "georgia", backgroundColor: "darkOrange", fontWeight: "bold" }}
             type="submit"
             fullWidth
             variant="contained"
@@ -117,11 +129,12 @@ export default function SignIn() {
           <Grid container justify="flex-end">
             <Grid item>
               <Link
+                style={{ color: "black", fontWeight: "bold", fontFamily: "georgia" }}
                 href="#"
                 variant="body2"
                 onClick={appContext.handleGoToRegisterPage}
               >
-                {"Don't have an account? Register"}
+                {"New User? Register Here."}
               </Link>
             </Grid>
           </Grid>

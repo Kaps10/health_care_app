@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AppContext from "../../../context/AppContext";
+import { InputLabel, MenuItem } from "@material-ui/core";
 import { stringify } from "querystring";
 
 const useStyles = makeStyles(theme => ({
@@ -44,6 +45,7 @@ export default function EnterVitalSigns() {
   const appContext: any = React.useContext(AppContext);
   const [vitalSigns, setVitalSigns] = React.useState({
     userId: appContext.getUserData._id,
+    userName: "",
     bodyTemperature: "",
     heartRate: "",
     bloodPressure: "",
@@ -63,7 +65,7 @@ export default function EnterVitalSigns() {
     res
       .then(data => data.json())
       .then((data: any) => {
-          alert(data.msg);
+        alert(data.msg);
       });
   };
 
@@ -71,18 +73,44 @@ export default function EnterVitalSigns() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5" className={classes.typography}>
+        <Typography style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }} component="h1" variant="h5" className={classes.typography}>
           Enter Vital Signs
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
+
+          <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>UserName of Patient:</InputLabel>
+              <br>
+
+              </br>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="userName"
+                label="UserName of Patient"
+                name="userName"
+                value={vitalSigns.userName}
+                onChange={(event: any) => {
+                  setVitalSigns({
+                    ...vitalSigns,
+                    userName: event.target.value
+                  });
+                }}
+              />
+            </Grid>
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Body Temperature:</InputLabel>
+              <br>
+
+              </br>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 id="bodyTemperature"
-                label="bodyTemperature"
+                label="Please enter Body Temperature"
                 name="bodyTemperature"
                 value={vitalSigns.bodyTemperature}
                 onChange={(event: any) => {
@@ -94,13 +122,18 @@ export default function EnterVitalSigns() {
               />
             </Grid>
 
+            
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Heart Rate:</InputLabel>
+              <br>
+
+              </br>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 id="heartRate"
-                label="heartRate"
+                label="Please enter Heart Rate"
                 name="heartRate"
                 value={vitalSigns.heartRate}
                 onChange={(event: any) => {
@@ -113,12 +146,16 @@ export default function EnterVitalSigns() {
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Blood Pressure:</InputLabel>
+              <br>
+
+              </br>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 id="bloodPressure"
-                label="bloodPressure"
+                label="Please enter Blood Pressure"
                 name="bloodPressure"
                 value={vitalSigns.bloodPressure}
                 onChange={(event: any) => {
@@ -131,12 +168,16 @@ export default function EnterVitalSigns() {
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Respiratory Rate:</InputLabel>
+              <br>
+
+              </br>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 name="respiratoryRate"
-                label="respiratoryRate"
+                label="Please enter Respiratory Rate"
                 id="respiratoryRate"
                 value={vitalSigns.respiratoryRate}
                 onChange={(event: any) => {
@@ -148,7 +189,7 @@ export default function EnterVitalSigns() {
               />
             </Grid>
           </Grid>
-          <Button
+          <Button style={{ color: 'black', fontFamily: 'georgia', backgroundColor: 'darkOrange', fontWeight: 'bold' }}
             type="submit"
             fullWidth
             variant="contained"

@@ -5,7 +5,6 @@ import { Typography, Box } from "@material-ui/core";
 import ReadMotiTips from "./ReadMotiTips";
 import CommonSignsCheckList from "./CommonSignsCheckList";
 import SendEmergencyAlert from "./SendEmergencyAlert";
-import MotiVideoGame from "./MotiVideoGame";
 import EnterDailyInfo from "./EnterDailyInfo";
 
 interface TabPanelProps {
@@ -41,17 +40,17 @@ export default function PatientHomepage() {
   return (
     <div>
       <Tabs
+        style={{ color: "black", fontFamily: "georgia", fontWeight: "bold" }}
         value={value}
-        indicatorColor="primary"
-        textColor="primary"
+        indicatorColor="secondary"
+        textColor="black"
         onChange={handleChange}
         aria-label="disabled tabs example"
       >
-        <Tab label="Daily Tips" />
-        <Tab label="Emergency Alert" />
-        <Tab label="Motivational Suggestions" />
-        <Tab label="Daily Infomation" />
-        <Tab label="Common Signs Checklist" />
+        <Tab style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }} label="Daily Tips" />
+        <Tab style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }} label="Emergency Alert" />
+        <Tab style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }} label="Daily Infomation" />
+        <Tab style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }} label="Common Signs Checklist" />
       </Tabs>
       <TabPanel value={value} index={0}>
         <ReadMotiTips />
@@ -60,12 +59,9 @@ export default function PatientHomepage() {
         <SendEmergencyAlert />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <MotiVideoGame />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
         <EnterDailyInfo />
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      <TabPanel value={value} index={3}>
         <CommonSignsCheckList />
       </TabPanel>
     </div>

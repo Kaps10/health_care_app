@@ -1,5 +1,4 @@
 import React from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -21,10 +20,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -78,19 +73,22 @@ export default function Register() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}></Avatar>
-        <Typography component="h1" variant="h5" className={classes.typography}>
-          Sign up
+        <Typography component="h1" variant="h5" className={classes.typography} style={{ fontWeight: "bold", fontFamily: "georgia" }}>
+          Register Here
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>First Name:</InputLabel>
+              <br>
+
+              </br>
               <TextField
+                style={{ fontWeight: "bold", fontFamily: "georgia" }}
                 variant="outlined"
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
                 name="firstName"
                 value={userInfoData.firstName}
                 onChange={(event: any) => {
@@ -103,12 +101,16 @@ export default function Register() {
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Last Name:</InputLabel>
+              <br>
+
+              </br>
               <TextField
+                style={{ fontWeight: "bold", fontFamily: "georgia" }}
                 variant="outlined"
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
                 name="lastName"
                 value={userInfoData.lastName}
                 onChange={(event: any) => {
@@ -121,12 +123,16 @@ export default function Register() {
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Username:</InputLabel>
+              <br>
+
+              </br>
               <TextField
+                style={{ fontWeight: "bold", fontFamily: "georgia" }}
                 variant="outlined"
                 required
                 fullWidth
                 id="userName"
-                label="User Name"
                 name="userName"
                 value={userInfoData.userName}
                 onChange={(event: any) => {
@@ -139,7 +145,12 @@ export default function Register() {
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Password:</InputLabel>
+              <br>
+
+              </br>
               <TextField
+                style={{ fontWeight: "bold", fontFamily: "georgia" }}
                 variant="outlined"
                 required
                 fullWidth
@@ -158,7 +169,7 @@ export default function Register() {
             </Grid>
             <Grid item xs={12}>
               <FormControl required className={classes.formControl}>
-                <InputLabel id="labelAccountType">
+              <InputLabel required id="labelAccountType" style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>
                   Choose Account Type
                 </InputLabel>
                 <Select
@@ -173,30 +184,32 @@ export default function Register() {
                     });
                   }}
                 >
-                  <MenuItem value="Nurse">Nurse</MenuItem>
-                  <MenuItem value="Patient">Patient</MenuItem>
+                  <MenuItem style={{ fontWeight: "bold", fontFamily: "georgia" }} value="Nurse">Nurse</MenuItem>
+                  <MenuItem style={{ fontWeight: "bold", fontFamily: "georgia" }} value="Patient">Patient</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
           </Grid>
           <Button
+            style={{ color: "black", fontFamily: "georgia", backgroundColor: "darkOrange", fontWeight: "bold" }}
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Register
           </Button>
 
           <Grid container justify="flex-end">
             <Grid item>
               <Link
+                style={{ color: "black", fontWeight: "bold", fontFamily: "georgia" }}
                 href="#"
                 variant="body2"
                 onClick={appContext.handleGoToLoginPage}
               >
-                Already have an account? Login
+                Already an user? Sign in here.
               </Link>
             </Grid>
           </Grid>

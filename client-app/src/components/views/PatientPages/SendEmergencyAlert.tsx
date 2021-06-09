@@ -17,7 +17,7 @@ export default function SendEmergencyAlert() {
   const stypeClass = useStyles();
   const appContext: any = React.useContext(AppContext);
   console.log(appContext.getUserData);
-  const requestData = {patientId:appContext.getUserData._id,patientUserName:appContext.getUserData.userName,time:Date.now(),status:true,responderId:null};
+  const requestData = { patientId: appContext.getUserData._id, patientUserName: appContext.getUserData.userName, time: Date.now(), status: true, responderId: null };
   const handleAlert = (e: any) => {
     e.preventDefault();
     const res = fetch("http://localhost:8500/sendEmergencyAlert", {
@@ -39,8 +39,9 @@ export default function SendEmergencyAlert() {
   };
 
   return (
-    <Button className={stypeClass.button} variant="contained" color="secondary" onClick={handleAlert} >
-      Send Emergency Alert
+    <Button className={stypeClass.button} variant="contained" color="secondary" onClick={handleAlert}
+      style={{ color: "black", fontFamily: "georgia", backgroundColor: "darkOrange", fontWeight: "bold", marginLeft: "650px" }} >
+        Send Emergency Alert
     </Button>
   );
 }

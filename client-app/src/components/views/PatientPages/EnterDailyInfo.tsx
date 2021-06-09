@@ -1,5 +1,5 @@
 import React from "react";
-import { 
+import {
   Container,
   CssBaseline,
   Button,
@@ -7,8 +7,10 @@ import {
   Grid,
   Box,
   Typography,
-  makeStyles } from "@material-ui/core";
+  makeStyles
+} from "@material-ui/core";
 import AppContext from "../../../context/AppContext";
+import { InputLabel, MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -42,6 +44,7 @@ export default function EnterDailyInfo() {
   const appContext: any = React.useContext(AppContext);
   const [vitalSigns, setVitalSigns] = React.useState({
     userId: appContext.getUserData._id,
+    userName: appContext.getUserData.userName,
     bodyTemperature: "",
     heartRate: "",
     bloodPressure: "",
@@ -61,7 +64,7 @@ export default function EnterDailyInfo() {
     res
       .then(data => data.json())
       .then((data: any) => {
-          alert(data.msg);
+        alert(data.msg);
       });
   };
 
@@ -69,18 +72,21 @@ export default function EnterDailyInfo() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5" className={classes.typography}>
+        <Typography component="h1" variant="h5" className={classes.typography} style={{ fontFamily: "georgia", fontWeight: "bold" }}>
           Enter Daily Info
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+          <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Blood Temperature:</InputLabel>
+              <br>
+
+              </br>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 id="bodyTemperature"
-                label="bodyTemperature"
                 name="bodyTemperature"
                 value={vitalSigns.bodyTemperature}
                 onChange={(event: any) => {
@@ -93,12 +99,15 @@ export default function EnterDailyInfo() {
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Heart Rate:</InputLabel>
+              <br>
+
+              </br>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 id="heartRate"
-                label="heartRate"
                 name="heartRate"
                 value={vitalSigns.heartRate}
                 onChange={(event: any) => {
@@ -111,12 +120,15 @@ export default function EnterDailyInfo() {
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Blood Pressure:</InputLabel>
+              <br>
+
+              </br>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 id="bloodPressure"
-                label="bloodPressure"
                 name="bloodPressure"
                 value={vitalSigns.bloodPressure}
                 onChange={(event: any) => {
@@ -129,12 +141,15 @@ export default function EnterDailyInfo() {
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel required style={{ fontFamily: "georgia", fontWeight: 'bold', color: 'black' }}>Respiratory Rate:</InputLabel>
+              <br>
+
+              </br>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 name="respiratoryRate"
-                label="respiratoryRate"
                 id="respiratoryRate"
                 value={vitalSigns.respiratoryRate}
                 onChange={(event: any) => {
@@ -147,6 +162,7 @@ export default function EnterDailyInfo() {
             </Grid>
           </Grid>
           <Button
+            style={{ color: "black", fontFamily: "georgia", backgroundColor: "darkOrange", fontWeight: "bold" }}
             type="submit"
             fullWidth
             variant="contained"
